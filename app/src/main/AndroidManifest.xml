@@ -19,6 +19,18 @@
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
+		<activity android:name=".TokenizingActivity">
+		</activity>
+		<activity android:name=".StopWordActivity">
+		</activity>
+		<activity android:name=".TfIdfActivity">
+		</activity>
+		<activity android:name=".WdfActivity">
+		</activity>
+		<activity android:name=".WdfLanjutanActivity">
+		</activity>
+		<activity android:name=".PerankinganActivity">
+		</activity>
 	</application>
 
 </manifest>

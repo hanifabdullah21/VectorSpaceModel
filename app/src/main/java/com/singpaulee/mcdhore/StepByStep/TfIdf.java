@@ -20,7 +20,7 @@ public class TfIdf {
 	ArrayList<TfIdfModel> listTf = new ArrayList<>();
 	ArrayList<TfIdfModel> listTfIdf = new ArrayList<>();
 
-	Integer q, d1, d2, d3, d4, d5;
+	Integer q, d1, d2, d3, d4, d5, d6;
 
 	public TfIdf(ArrayList<String> listTerm, ArrayList<NewsDetail> listTwitter) {
 		this.listTerm = listTerm;
@@ -54,6 +54,8 @@ public class TfIdf {
 						d4 = jumlah;
 					} else if (dok == 5) {
 						d5 = jumlah;
+					} else if (dok == 6) {
+						d6 = jumlah;
 					}
 				} else if (!termDok.contains(term)) {
 					if (dok == 0) {
@@ -68,22 +70,22 @@ public class TfIdf {
 						d4 = 0;
 					} else if (dok == 5) {
 						d5 = 0;
+					} else if (dok == 6) {
+						d6 = 0;
 					}
 				}
 			}
-			TfIdfModel tf = new TfIdfModel(term, q, d1, d2, d3, d4, d5);
+			TfIdfModel tf = new TfIdfModel(term, q, d1, d2, d3, d4, d5, d6);
 			listTf.add(tf);
 		}
 		return listTf;
 	}
 
-
-
 	public ArrayList<TfIdfModel> countTfIdf() {
 		ArrayList<TfIdfModel> listTf = TermFrekuency();
 
 		for (int y = 0; y < listTf.size(); y++) {
-			int q=0, d1=0, d2=0, d3=0, d4=0, d5=0;
+			int q=0, d1=0, d2=0, d3=0, d4=0, d5=0, d6=0;
 			int df=0;
 			double dfi=0, idf=0;
 			String term;
@@ -95,6 +97,7 @@ public class TfIdf {
 			d3 = listTf.get(y).getDokumen3();
 			d4 = listTf.get(y).getDokumen4();
 			d5 = listTf.get(y).getDokumen5();
+			d6 = listTf.get(y).getDokumen6();
 
 
 			if(q!=0){df=df+1;}
@@ -103,12 +106,13 @@ public class TfIdf {
 			if(d3!=0){df=df+1;}
 			if(d4!=0){df=df+1;}
 			if(d5!=0){df=df+1;}
+			if(d6!=0){df=df+1;}
 
-			dfi = 6/Double.valueOf(df);
+			dfi = 7/Double.valueOf(df);
 			idf = Math.log(dfi);
 
 			if(df != 0){
-				TfIdfModel model = new TfIdfModel(term,q,d1,d2,d3,d4,d5,df,dfi,idf);
+				TfIdfModel model = new TfIdfModel(term,q,d1,d2,d3,d4,d5,d6,df,dfi,idf);
 				listTfIdf.add(model);
 			}
 		}

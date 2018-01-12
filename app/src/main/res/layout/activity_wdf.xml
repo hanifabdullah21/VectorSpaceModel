@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	tools:context="com.singpaulee.mcdhore.WdfActivity">
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:id="@+id/relative_wdf"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="10dp"
+				android:layout_marginTop="10dp"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/judul_activity1"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="10dp"
+					android:text="Menghitung WDF"
+					android:textSize="22sp"/>
+
+				<HorizontalScrollView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+					<ScrollView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content">
+						<LinearLayout
+							android:id="@+id/line_wdf"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:orientation="vertical">
+							<TableLayout
+								android:id="@+id/table_wdf"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:orientation="vertical">
+								<TableRow
+									android:id="@+id/table_row">
+									<TextView
+										android:layout_width="wrap_content"
+										android:layout_height="wrap_content"
+										android:layout_margin="5dp"
+										android:text="Kata"/>
+
+									<TextView
+										android:layout_width="wrap_content"
+										android:layout_height="wrap_content"
+										android:layout_margin="5dp"
+										android:text="WDQ"/>
+									<TextView
+										android:layout_width="wrap_content"
+										android:layout_height="wrap_content"
+										android:layout_margin="5dp"
+										android:text="WD1"/>
+									<TextView
+										android:layout_width="wrap_content"
+										android:layout_height="wrap_content"
+										android:layout_margin="5dp"
+										android:text="WD2"/>
+									<TextView
+										android:layout_width="wrap_content"
+										android:layout_height="wrap_content"
+										android:layout_margin="5dp"
+										android:text="WD3"/>
+									<TextView
+										android:layout_width="wrap_content"
+										android:layout_height="wrap_content"
+										android:layout_margin="5dp"
+										android:text="WD4"/>
+									<TextView
+										android:layout_width="wrap_content"
+										android:layout_height="wrap_content"
+										android:layout_margin="5dp"
+										android:text="WD5"/>
+									<TextView
+										android:layout_width="wrap_content"
+										android:layout_height="wrap_content"
+										android:layout_margin="5dp"
+										android:text="WD6"/>
+								</TableRow>
+							</TableLayout>
+						</LinearLayout>
+					</ScrollView>
+				</HorizontalScrollView>
+
+				<Button
+					android:id="@+id/btn_next"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="Menghitung Wdq X Wdf"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/relative_wdqwdf"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="10dp"
+				android:layout_marginTop="10dp"
+				android:orientation="vertical"
+				android:visibility="gone">
+
+				<TextView
+					android:id="@+id/judul_activity2"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="10dp"
+					android:text="Menghitung WDQ X WDF"
+					android:textSize="22sp"/>
+
+				<LinearLayout
+					android:id="@+id/line_wdqwdf"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+				</LinearLayout>
+
+				<Button
+					android:id="@+id/btn_next1"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/line_wdf"
+					android:text="Menghitung Panjang Vektor"/>
+			</LinearLayout>
+		</LinearLayout>
+	</ScrollView>
+
+</LinearLayout>

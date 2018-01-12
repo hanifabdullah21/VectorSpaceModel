@@ -1,7 +1,11 @@
 package com.singpaulee.mcdhore;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -48,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
 	ArrayList<Double> listCosSim = new ArrayList<>();
 	String query;        //get text from edittext
 
-	Double ranking[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0,};
-	String dokumen[] = {"", "", "", "", "", "",};
-	Integer index[] = {0, 0, 0, 0, 0, 0};
+	Double ranking[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0,0.0,};
+	String dokumen[] = {"", "", "", "", "", "","",};
+	Integer index[] = {0, 0, 0, 0, 0, 0,0,};
 
 	Tokenization tokenizationClass;
 	TfIdf tfIdf;
@@ -60,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 	private TextView mTvDok3;
 	private TextView mTvDok4;
 	private TextView mTvDok5;
+	private EditText medtDok6;
 	private EditText mEdtQuery;
 	private Button mBtnProses;
 	private TextView mTvNama1;
@@ -67,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
 	private TextView mTvNama3;
 	private TextView mTvNama4;
 	private TextView mTvNama5;
+	private TextView mTvNama6;
+
+	private boolean doubleBackToExitPressedOnce=false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 		initView();
 
-		getStopword();
-		getKatadasar();
+//		getStopword();
+//		getKatadasar();
 		getNews();
 
 		listOfDoc = new ArrayList<>();
@@ -83,6 +91,9 @@ public class MainActivity extends AppCompatActivity {
 		mBtnProses.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				if(!validasi()){
+					return;
+				}
 				query = mEdtQuery.getText().toString().trim();
 				NewsDetail model = new NewsDetail(mEdtQuery.getText().toString());
 				listOfDoc.add(model);
@@ -96,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
 				listOfDoc.add(model4);
 				NewsDetail model5 = new NewsDetail(listResult.get(4).getTweetText());
 				listOfDoc.add(model5);
+				NewsDetail model6 = new NewsDetail(medtDok6.getText().toString());
+				listOfDoc.add(model6);
 
 				for (int list = 0; list < listOfDoc.size(); list++) {
 					if (list == 0) {
@@ -104,9 +117,29 @@ public class MainActivity extends AppCompatActivity {
 						Log.d("Q and Doc", "Document: " + listOfDoc.get(list).getTweetText());
 					}
 				}
-				tokenization();
+
+//				tokenization();
+
+				Intent i = new Intent(MainActivity.this, TokenizingActivity.class);
+				i.putParcelableArrayListExtra("listOfDoc",listOfDoc);
+				startActivity(i);
+
 			}
 		});
+	}
+
+	private boolean validasi() {
+		if(medtDok6.getText().toString().isEmpty()){
+			medtDok6.setError("Masukkan dokumen lebih dahulu");
+			medtDok6.requestFocus();
+			return false;
+		}
+		if (mEdtQuery.getText().toString().isEmpty()){
+			mEdtQuery.setError("Masukkan query lebih dahulu");
+			mEdtQuery.requestFocus();
+			return false;
+		}
+		return true;
 	}
 
 
@@ -229,6 +262,7 @@ public class MainActivity extends AppCompatActivity {
 					listHasilTfIdf.get(a).getDokumen3() + "\t" +
 					listHasilTfIdf.get(a).getDokumen4() + "\t" +
 					listHasilTfIdf.get(a).getDokumen5() + "\t" +
+					listHasilTfIdf.get(a).getDokumen6() + "\t" +
 					listHasilTfIdf.get(a).getTotalDf() + "\t" +
 					listHasilTfIdf.get(a).getDfi() + "\t" +
 					listHasilTfIdf.get(a).getIdf() + "\t");
@@ -249,7 +283,9 @@ public class MainActivity extends AppCompatActivity {
 					listWdf.get(b).getWd2() + "\t" +
 					listWdf.get(b).getWd3() + "\t" +
 					listWdf.get(b).getWd4() + "\t" +
-					listWdf.get(b).getWd5() + "\t");
+					listWdf.get(b).getWd5() + "\t" +
+					listWdf.get(b).getWd6() + "\t");
+
 		}
 
 		//TODO 6 MENGHITUNG WDQ X WDF
@@ -344,8 +380,33 @@ public class MainActivity extends AppCompatActivity {
 		mTvNama5.setText(dokumen[4]);
 		String[] dok5 = listOfDoc.get(index[4]).getTweetText().split("\\.");
 		mTvDok5.setText(dok5[0]);
+
+		mTvNama6.setText(dokumen[5]);
+		String[] dok6 = listOfDoc.get(index[5]).getTweetText().split("\\.");
+		medtDok6.setText(dok6[0]);
 //		mTvDok5.setText(listOfDoc.get(index[4]).getTweetText());
 
+	}
+
+	@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+	@Override
+	public void onBackPressed() {
+		if (doubleBackToExitPressedOnce) {
+			super.onBackPressed();
+			finishAffinity();
+			return;
+		}
+		this.doubleBackToExitPressedOnce = true;
+		Toast.makeText(this, "Ketuk lagi untuk keluar", Toast.LENGTH_SHORT).show();
+
+		new Handler().postDelayed(new Runnable() {
+			@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+			@Override
+			public void run() {
+				doubleBackToExitPressedOnce = false;
+				finishAffinity();
+			}
+		}, 2000);
 	}
 
 	private void initView() {
@@ -354,6 +415,7 @@ public class MainActivity extends AppCompatActivity {
 		mTvDok3 = findViewById(R.id.tv_dok3);
 		mTvDok4 = findViewById(R.id.tv_dok4);
 		mTvDok5 = findViewById(R.id.tv_dok5);
+		medtDok6 = findViewById(R.id.tv_dok6);
 		mEdtQuery = findViewById(R.id.edt_query);
 		mBtnProses = findViewById(R.id.btn_proses);
 		mTvNama1 = findViewById(R.id.tv_nama1);
@@ -361,6 +423,7 @@ public class MainActivity extends AppCompatActivity {
 		mTvNama3 = findViewById(R.id.tv_nama3);
 		mTvNama4 = findViewById(R.id.tv_nama4);
 		mTvNama5 = findViewById(R.id.tv_nama5);
+		mTvNama6 = findViewById(R.id.tv_nama6);
 	}
-
 }
+

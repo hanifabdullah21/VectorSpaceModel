@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	tools:context="com.singpaulee.mcdhore.StopWordActivity">
+
+	<TextView
+		android:id="@+id/judul_avtivity"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Daftar Kata Setelah Filtering"
+		android:textSize="22sp"
+		android:layout_margin="10dp"/>
+
+	<Button
+		android:id="@+id/btn_next"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="TF-IDF"
+		android:layout_alignParentBottom="true"/>
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_margin="10dp"
+		android:layout_below="@id/judul_avtivity"
+		android:layout_above="@id/btn_next">
+		<LinearLayout
+			android:id="@+id/line_stopword"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical">
+		</LinearLayout>
+	</ScrollView>
+</RelativeLayout>

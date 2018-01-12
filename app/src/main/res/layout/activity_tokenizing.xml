@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	tools:context="com.singpaulee.mcdhore.TokenizingActivity">
+
+	<TextView
+		android:id="@+id/judul_activity"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Daftar Kata Tokenizing"
+		android:textSize="22sp"
+		android:layout_margin="10dp"
+		android:layout_alignParentTop="true"/>
+
+	<Button
+		android:id="@+id/btn_next"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="FILTERING / STOPWORD"
+		android:layout_alignParentBottom="true"/>
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_margin="10dp"
+		android:layout_below="@id/judul_activity"
+		android:layout_above="@id/btn_next">
+		<LinearLayout
+			android:id="@+id/line_tokenize"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical">
+		</LinearLayout>
+	</ScrollView>
+</RelativeLayout>
