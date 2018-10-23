@@ -11,16 +11,31 @@ import java.util.ArrayList;
  */
 
 public class ResponseList {
-	@SerializedName("twitter")
-	@Expose
-	private ArrayList<NewsDetail> respons = null;
+    @SerializedName("twitter")
+    @Expose
+    private ArrayList<NewsDetail> respons = null;
 
-	public ArrayList<NewsDetail> getRespons() {
-		return respons;
-	}
+    @SerializedName("stopword")
+    @Expose
+    private ArrayList<StopWordModel> stopword = null;
 
-	public void setTwitter(ArrayList<NewsDetail> respons) {
-		this.respons = respons;
-	}
+    public ArrayList<NewsDetail> getRespons() {
+        return respons;
+    }
 
+    public void setTwitter(ArrayList<NewsDetail> respons) {
+        this.respons = respons;
+    }
+
+    public void setRespons(ArrayList<NewsDetail> respons) {
+        this.respons = respons;
+    }
+
+    public ArrayList<StopWordModel> getStopword() {
+        return stopword;
+    }
+
+    public void setStopword(ArrayList<StopWordModel> stopword) {
+        this.stopword = stopword;
+    }
 }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/McdHore.iml" filepath="$PROJECT_DIR$/McdHore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VectorSpaceModel.iml" filepath="$PROJECT_DIR$/VectorSpaceModel.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

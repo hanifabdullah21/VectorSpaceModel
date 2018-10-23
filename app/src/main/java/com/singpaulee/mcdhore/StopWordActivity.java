@@ -12,9 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.singpaulee.mcdhore.Model.NewsDetail;
+import com.singpaulee.mcdhore.Model.ResponseList;
 import com.singpaulee.mcdhore.Model.StopWordModel;
 import com.singpaulee.mcdhore.StepByStep.Filtering;
 import com.singpaulee.mcdhore.rest.ApiClient;
+import com.singpaulee.mcdhore.rest.ConfigSpreadsheet;
 import com.singpaulee.mcdhore.rest.ConfigWebhost;
 
 import java.util.ArrayList;
@@ -66,19 +68,19 @@ public class StopWordActivity extends AppCompatActivity {
 		pd.setMessage("Load Data");
 		pd.show();
 
-		ApiClient apiClient = ConfigWebhost.getRetrofit().create(ApiClient.class);
-		final Call<ArrayList<StopWordModel>> q = apiClient.stopword();
-		q.enqueue(new Callback<ArrayList<StopWordModel>>() {
+		ApiClient apiClient = ConfigSpreadsheet.getRetrofit().create(ApiClient.class);
+		final Call<ResponseList> q = apiClient.stopword();
+		q.enqueue(new Callback<ResponseList>() {
 			@Override
-			public void onResponse(Call<ArrayList<StopWordModel>> call, Response<ArrayList<StopWordModel>> response) {
+			public void onResponse(Call<ResponseList> call, Response<ResponseList> response) {
 				pd.dismiss();
-				ArrayList<StopWordModel> list = response.body();
+				ArrayList<StopWordModel> list = response.body().getStopword();
 				listStopword = list;
 				filtering();
 			}
 
 			@Override
-			public void onFailure(Call<ArrayList<StopWordModel>> call, Throwable t) {
+			public void onFailure(Call<ResponseList> call, Throwable t) {
 				Toast.makeText(StopWordActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
 			}
 		});

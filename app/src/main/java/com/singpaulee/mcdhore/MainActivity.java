@@ -185,27 +185,6 @@ public class MainActivity extends AppCompatActivity {
 		filtering();
 	}
 
-	public void getStopword() {
-		final ProgressDialog pd = new ProgressDialog(this);
-		pd.setMessage("Load Data");
-		pd.show();
-
-		ApiClient apiClient = ConfigWebhost.getRetrofit().create(ApiClient.class);
-		final Call<ArrayList<StopWordModel>> q = apiClient.stopword();
-		q.enqueue(new Callback<ArrayList<StopWordModel>>() {
-			@Override
-			public void onResponse(Call<ArrayList<StopWordModel>> call, Response<ArrayList<StopWordModel>> response) {
-				pd.dismiss();
-				ArrayList<StopWordModel> list = response.body();
-				listStopword = list;
-			}
-
-			@Override
-			public void onFailure(Call<ArrayList<StopWordModel>> call, Throwable t) {
-				Toast.makeText(MainActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
-			}
-		});
-	}
 
 	//TODO 2 FILTERING
 	private void filtering() {
